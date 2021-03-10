@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 from models import xgb_r, custom_input_for_model, live_predictor
 from data_preparation import split_years_df, split_train
-from aa_web_scraper import main
 import xgboost as xg 
 
 
