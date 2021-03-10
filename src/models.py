@@ -1,6 +1,7 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 import numpy as np
+import xgboost as xg 
 
 def linear_model(x_train, x_test, y_train, y_test):
     model = LinearRegression()
@@ -19,3 +20,14 @@ def custom_input_for_model(model_fit, x, y_price):
     potential_profit = y_predict - actual_price   
     print("Potential Profit: £{}".format(potential_profit)) 
    
+def xgb_r(df):
+    xgb_r = xg.XGBRegressor(objective = "reg:squarederror", n_estimators = 10)
+    xgb_r_fit = xgb_r.fit(np.array(df[["year", "mileage", "engineSize"]]), np.array(df["price"]))
+    return xgb_r_fit
+
+def live_predictor(model_fit, df):
+    x = df[["year", "mileage", "engineSize"]]
+    y = df["price"]
+    y_predict = model_fit.predict(np.array(x).reshape(1,-1))
+    r2 = r2_score(y, y_predict)
+    return r2

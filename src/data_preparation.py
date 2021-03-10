@@ -8,8 +8,10 @@ def split_years_df():
     focus_2017 = df_focus[(df_focus["year"]==2017)]
     focus_2018 = df_focus[(df_focus["year"]==2018)]
     focus_2019 = df_focus[(df_focus["year"]==2019)]
+
+    df_17_to_19 = pd.concat([focus_2017, focus_2018, focus_2019],axis=0)
     
-    return focus_2017, focus_2018, focus_2019
+    return focus_2017, focus_2018, focus_2019, df_17_to_19
 
 def split_train(df, X):
     x = df[X]
